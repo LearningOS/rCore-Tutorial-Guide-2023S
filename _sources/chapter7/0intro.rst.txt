@@ -14,8 +14,8 @@
 
 .. code-block:: console
 
-   $ git clone https://github.com/LearningOS/rCore-Tutorial-Code-2022S.git
-   $ cd rCore-Tutorial-Code-2022S
+   $ git clone https://github.com/LearningOS/rCore-Tutorial-Code-2023S.git
+   $ cd rCore-Tutorial-Code-2023S
    $ git checkout ch7
 
 在 qemu 模拟器上运行本章代码：

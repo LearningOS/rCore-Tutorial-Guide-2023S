@@ -43,8 +43,8 @@
 
 .. code-block:: console
 
-   $ git clone https://github.com/LearningOS/rCore-Tutorial-Code-2022S
-   $ cd rCore-Tutorial-Code-2022S
+   $ git clone https://github.com/LearningOS/rCore-Tutorial-Code-2023S
+   $ cd rCore-Tutorial-Code-2023S
    $ git checkout ch1
 
 运行本章代码，并设置日志级别为 ``TRACE``：

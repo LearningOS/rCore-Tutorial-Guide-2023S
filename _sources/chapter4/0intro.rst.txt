@@ -16,18 +16,18 @@
 
 .. code-block:: console
 
-   $ git clone https://github.com/LearningOS/rCore-Tutorial-Code-2022S.git
-   $ cd rCore-Tutorial-Code-2022S
+   $ git clone https://github.com/LearningOS/rCore-Tutorial-Code-2023S.git
+   $ cd rCore-Tutorial-Code-2023S
    $ git checkout ch4
-   $ git clone https://github.com/LearningOS/rCore-Tutorial-Test-2022S.git user
+   $ git clone https://github.com/LearningOS/rCore-Tutorial-Test-2023S.git user
 
 或许你之前已经克隆过了仓库，只希望从远程仓库更新，而非再克隆一次：
 
 .. code-block:: console
 
-   $ cd rCore-Tutorial-Code-2022S
+   $ cd rCore-Tutorial-Code-2023S
    # 你可以将 upstream 改为你喜欢的名字
-   $ git remote add upstream https://github.com/LearningOS/rCore-Tutorial-Code-2022S.git
+   $ git remote add upstream https://github.com/LearningOS/rCore-Tutorial-Code-2023S.git
    # 更新仓库信息
    $ git fetch upstream
    # 查看已添加的远程仓库；应该能看到已有一个 origin 和新添加的 upstream 仓库

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="第四章：地址空间" href="../chapter4/index.html" /><link rel="prev" title="分时多任务系统" href="4time-sharing-system.html" />
 
     <meta name="generator" content="sphinx-4.1.2, furo 2021.08.31"/>
-        <title>chapter3练习 - rCore-Tutorial-Guide-2022S 文档</title>
+        <title>chapter3练习 - rCore-Tutorial-Guide-2023S 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=c7c65a82b42f6b978e58466c1e9ef2509836d916" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
@@ -124,7 +124,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">rCore-Tutorial-Guide-2022S  文档</div></a>
+      <a href="../index.html"><div class="brand">rCore-Tutorial-Guide-2023S  文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -147,7 +147,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">rCore-Tutorial-Guide-2022S  文档</span>
+  <span class="sidebar-brand-text">rCore-Tutorial-Guide-2023S  文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=搜索 name="q" aria-label="搜索">
@@ -378,10 +378,10 @@
 <h2>简答作业<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <ol class="arabic">
 <li><p>正确进入 U 态后，程序的特征还应有：使用 S 态特权指令，访问 S 态寄存器后会报错。
-请同学们可以自行测试这些内容 (运行 <a class="reference external" href="https://github.com/LearningOS/rCore-Tutorial-Test-2022S/tree/master/src/bin">Rust 三个 bad 测例 (ch2b_bad_*.rs)</a> ，
+请同学们可以自行测试这些内容 (运行 <a class="reference external" href="https://github.com/LearningOS/rCore-Tutorial-Test-2023S/tree/master/src/bin">Rust 三个 bad 测例 (ch2b_bad_*.rs)</a> ，
 注意在编译时至少需要指定 <code class="docutils literal notranslate"><span class="pre">LOG=ERROR</span></code> 才能观察到内核的报错信息) ，
 描述程序出错行为，同时注意注明你使用的 sbi 及其版本。</p></li>
-<li><p>深入理解 <a class="reference external" href="https://github.com/LearningOS/rCore-Tutorial-Code-2022S/blob/ch3/os/src/trap/trap.S">trap.S</a>
+<li><p>深入理解 <a class="reference external" href="https://github.com/LearningOS/rCore-Tutorial-Code-2023S/blob/ch3/os/src/trap/trap.S">trap.S</a>
 中两个函数 <code class="docutils literal notranslate"><span class="pre">__alltraps</span></code> 和 <code class="docutils literal notranslate"><span class="pre">__restore</span></code> 的作用，并回答如下问题:</p>
 <ol class="arabic">
 <li><p>L40：刚进入 <code class="docutils literal notranslate"><span class="pre">__restore</span></code> 时，<code class="docutils literal notranslate"><span class="pre">a0</span></code> 代表了什么值。请指出 <code class="docutils literal notranslate"><span class="pre">__restore</span></code> 的两种使用情景。</p></li>
@@ -459,7 +459,7 @@
         </div>
 
         <div class="related-information">
-              Copyright &#169; OS2022Spring
+              Copyright &#169; OS2023Spring
             |
             Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
               and
@@ -530,7 +530,7 @@ var addUtterances = () => {
     script.src = "https://utteranc.es/client.js";
     script.async = "async";
 
-    script.setAttribute("repo", "LearningOS/rCore-Tutorial-Guide-2022S");
+    script.setAttribute("repo", "LearningOS/rCore-Tutorial-Guide-2023S");
     script.setAttribute("issue-term", "pathname");
     script.setAttribute("theme", "github-light");
     script.setAttribute("label", "comments");
