@@ -126,7 +126,7 @@ Rust 开发环境配置
 Qemu 模拟器安装
 ----------------------------------------
 
-我们需要使用 Qemu 5.0.0 版本进行实验，为此，从源码手动编译安装 Qemu 模拟器：
+我们需要使用 Qemu 7.0.0 版本进行实验，为此，从源码手动编译安装 Qemu 模拟器：
 
 .. attention::
 
@@ -141,11 +141,11 @@ Qemu 模拟器安装
    # 下载源码包
    # 如果下载速度过慢可以使用我们提供的百度网盘链接：https://pan.baidu.com/s/1z-iWIPjxjxbdFS2Qf-NKxQ
    # 提取码 8woe
-   wget https://download.qemu.org/qemu-5.0.0.tar.xz
+   wget https://download.qemu.org/qemu-7.0.0.tar.xz
    # 解压
-   tar xvJf qemu-5.0.0.tar.xz
+   tar xvJf qemu-7.0.0.tar.xz
    # 编译安装并配置 RISC-V 支持
-   cd qemu-5.0.0
+   cd qemu-7.0.0
    ./configure --target-list=riscv64-softmmu,riscv64-linux-user
    make -j$(nproc)
 
@@ -169,10 +169,10 @@ Qemu 模拟器安装
 
 .. code-block:: bash
 
-   # 请注意，qemu-5.0.0 的父目录可以随着你的实际安装位置灵活调整
-   export PATH=$PATH:/home/shinbokuow/Downloads/built/qemu-5.0.0
-   export PATH=$PATH:/home/shinbokuow/Downloads/built/qemu-5.0.0/riscv64-softmmu
-   export PATH=$PATH:/home/shinbokuow/Downloads/built/qemu-5.0.0/riscv64-linux-user
+   # 请注意，qemu-7.0.0 的父目录可以随着你的实际安装位置灵活调整
+   export PATH=$PATH:/home/shinbokuow/Downloads/built/qemu-7.0.0
+   export PATH=$PATH:/home/shinbokuow/Downloads/built/qemu-7.0.0/riscv64-softmmu
+   export PATH=$PATH:/home/shinbokuow/Downloads/built/qemu-7.0.0/riscv64-linux-user
 
 随后即可在当前终端 ``source ~/.bashrc`` 更新系统路径，或者直接重启一个新的终端。
 
