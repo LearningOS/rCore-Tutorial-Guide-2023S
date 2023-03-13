@@ -203,29 +203,30 @@ Qemu 模拟器安装
 
 .. code-block:: bash
 
-   [rustsbi] RustSBI version 0.2.0-alpha.4
+   [rustsbi] RustSBI version 0.3.0-alpha.4, adapting to RISC-V SBI v1.0.0
    .______       __    __      _______.___________.  _______..______   __
    |   _  \     |  |  |  |    /       |           | /       ||   _  \ |  |
    |  |_)  |    |  |  |  |   |   (----`---|  |----`|   (----`|  |_)  ||  |
    |      /     |  |  |  |    \   \       |  |      \   \    |   _  < |  |
    |  |\  \----.|  `--'  |.----)   |      |  |  .----)   |   |  |_)  ||  |
    | _| `._____| \______/ |_______/       |__|  |_______/    |______/ |__|
-
-   [rustsbi] Implementation: RustSBI-QEMU Version 0.0.1
-   [rustsbi-dtb] Hart count: cluster0 with 1 cores
-   [rustsbi] misa: RV64ACDFIMSU
-   [rustsbi] mideleg: ssoft, stimer, sext (0x222)
-   [rustsbi] medeleg: ima, ia, bkpt, la, sa, uecall, ipage, lpage, spage (0xb1ab)
-   [rustsbi] pmp0: 0x80000000 ..= 0x800fffff (rwx)
-   [rustsbi] pmp1: 0x80000000 ..= 0x807fffff (rwx)
-   [rustsbi] pmp2: 0x0 ..= 0xffffffffffffff (---)
-   [rustsbi] enter supervisor 0x80200000
-   Hello, world!
-   [DEBUG] .rodata [0x80203000, 0x80205000)
-   [ INFO] .data [0x80205000, 0x80206000)
-   [ WARN] boot_stack [0x80206000, 0x80216000)
-   [ERROR] .bss [0x80216000, 0x80217000)
-   Panicked at src/main.rs:48 Shutdown machine!
+   [rustsbi] Implementation     : RustSBI-QEMU Version 0.2.0-alpha.2
+   [rustsbi] Platform Name      : riscv-virtio,qemu
+   [rustsbi] Platform SMP       : 1
+   [rustsbi] Platform Memory    : 0x80000000..0x88000000
+   [rustsbi] Boot HART          : 0
+   [rustsbi] Device Tree Region : 0x87e00000..0x87e00f85
+   [rustsbi] Firmware Address   : 0x80000000
+   [rustsbi] Supervisor Address : 0x80200000
+   [rustsbi] pmp01: 0x00000000..0x80000000 (-wr)
+   [rustsbi] pmp02: 0x80000000..0x80200000 (---)
+   [rustsbi] pmp03: 0x80200000..0x88000000 (xwr)
+   [rustsbi] pmp04: 0x88000000..0x00000000 (-wr)
+   [kernel] Hello, world!
+   [DEBUG] [kernel] .rodata [0x80203000, 0x80205000)
+   [ INFO] [kernel] .data [0x80205000, 0x80206000)
+   [ WARN] [kernel] boot_stack top=bottom=0x80216000, lower_bound=0x80206000
+   [ERROR] [kernel] .bss [0x80216000, 0x80217000)
 
 通常 rCore 会自动关闭 Qemu 。如果在某些情况下需要强制结束，可以先按下 ``Ctrl+A`` ，再按下 ``X`` 来退出 Qemu。
 
