@@ -630,19 +630,21 @@ trap handler 入口点的地址。注意这里我们不能像之前的章节那�
 <span class="linenos">33</span><span class="w">            </span><span class="n">memory_set</span><span class="p">,</span><span class="w"></span>
 <span class="linenos">34</span><span class="w">            </span><span class="n">trap_cx_ppn</span><span class="p">,</span><span class="w"></span>
 <span class="linenos">35</span><span class="w">            </span><span class="n">base_size</span>: <span class="nc">user_sp</span><span class="p">,</span><span class="w"></span>
-<span class="linenos">36</span><span class="w">        </span><span class="p">};</span><span class="w"></span>
-<span class="linenos">37</span><span class="w">        </span><span class="c1">// prepare TrapContext in user space</span>
-<span class="linenos">38</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">trap_cx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task_control_block</span><span class="p">.</span><span class="n">get_trap_cx</span><span class="p">();</span><span class="w"></span>
-<span class="linenos">39</span><span class="w">        </span><span class="o">*</span><span class="n">trap_cx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TrapContext</span>::<span class="n">app_init_context</span><span class="p">(</span><span class="w"></span>
-<span class="linenos">40</span><span class="w">            </span><span class="n">entry_point</span><span class="p">,</span><span class="w"></span>
-<span class="linenos">41</span><span class="w">            </span><span class="n">user_sp</span><span class="p">,</span><span class="w"></span>
-<span class="linenos">42</span><span class="w">            </span><span class="n">KERNEL_SPACE</span><span class="p">.</span><span class="n">exclusive_access</span><span class="p">().</span><span class="n">token</span><span class="p">(),</span><span class="w"></span>
-<span class="linenos">43</span><span class="w">            </span><span class="n">kernel_stack_top</span><span class="p">,</span><span class="w"></span>
-<span class="linenos">44</span><span class="w">            </span><span class="n">trap_handler</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">usize</span><span class="p">,</span><span class="w"></span>
-<span class="linenos">45</span><span class="w">        </span><span class="p">);</span><span class="w"></span>
-<span class="linenos">46</span><span class="w">        </span><span class="n">task_control_block</span><span class="w"></span>
-<span class="linenos">47</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="linenos">48</span><span class="p">}</span><span class="w"></span>
+<span class="linenos">36</span><span class="w">            </span><span class="n">heap_bottom</span>: <span class="nc">user_sp</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">37</span><span class="w">            </span><span class="n">program_brk</span>: <span class="nc">user_sp</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">38</span><span class="w">        </span><span class="p">};</span><span class="w"></span>
+<span class="linenos">39</span><span class="w">        </span><span class="c1">// prepare TrapContext in user space</span>
+<span class="linenos">40</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">trap_cx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task_control_block</span><span class="p">.</span><span class="n">get_trap_cx</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">41</span><span class="w">        </span><span class="o">*</span><span class="n">trap_cx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TrapContext</span>::<span class="n">app_init_context</span><span class="p">(</span><span class="w"></span>
+<span class="linenos">42</span><span class="w">            </span><span class="n">entry_point</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">43</span><span class="w">            </span><span class="n">user_sp</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">44</span><span class="w">            </span><span class="n">KERNEL_SPACE</span><span class="p">.</span><span class="n">exclusive_access</span><span class="p">().</span><span class="n">token</span><span class="p">(),</span><span class="w"></span>
+<span class="linenos">45</span><span class="w">            </span><span class="n">kernel_stack_top</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">46</span><span class="w">            </span><span class="n">trap_handler</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">usize</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">47</span><span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="linenos">48</span><span class="w">        </span><span class="n">task_control_block</span><span class="w"></span>
+<span class="linenos">49</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">50</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -653,7 +655,7 @@ trap handler 入口点的地址。注意这里我们不能像之前的章节那�
 加入到内核地址空间中；</p></li>
 </ul>
 <ul id="trap-return-intro">
-<li><p>我们在应用的内核栈顶压入一个跳转到 <code class="docutils literal notranslate"><span class="pre">trap_return</span></code> 而不是 <code class="docutils literal notranslate"><span class="pre">__restore</span></code> 的任务上下文，
+<li><p>我们在 <code class="docutils literal notranslate"><span class="pre">goto_trap_return</span></code> 中标记任务上下文为跳转到 <code class="docutils literal notranslate"><span class="pre">trap_return</span></code> 而不是 <code class="docutils literal notranslate"><span class="pre">__restore</span></code> ，
 这主要是为了能够支持对该应用的启动并顺利切换到用户地址空间执行。在构造方式上，只是将 ra 寄存器的值设置为
 <code class="docutils literal notranslate"><span class="pre">trap_return</span></code> 的地址。 <code class="docutils literal notranslate"><span class="pre">trap_return</span></code> 是我们后面要介绍的新版的 Trap 处理的一部分。</p></li>
 <li><p>初始化该应用的 Trap 上下文，由于它是在应用地址空间而不是在内核地址空间中，我们只能手动查页表找到
