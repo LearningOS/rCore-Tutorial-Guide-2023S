@@ -228,7 +228,7 @@
 
     // os/src/mm/memory_set.rs
 
-    impl MemoryArea {
+    impl MapArea {
         pub fn map_one(&mut self, page_table: &mut PageTable, vpn: VirtPageNum) {
             let ppn: PhysPageNum;
             match self.map_type {
@@ -245,11 +245,8 @@
             page_table.map(vpn, ppn, pte_flags);
         }
         pub fn unmap_one(&mut self, page_table: &mut PageTable, vpn: VirtPageNum) {
-            match self.map_type {
-                MapType::Framed => {
-                    self.data_frames.remove(&vpn);
-                }
-                _ => {}
+            if self.map_type == MapType::Framed {
+                self.data_frames.remove(&vpn);
             }
             page_table.unmap(vpn);
         }
