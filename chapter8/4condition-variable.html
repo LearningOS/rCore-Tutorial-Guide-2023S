@@ -382,7 +382,7 @@ second 休眠，直到等待的条件满足，再继续执行。于是，我们�
 <li><p>Mesa 语义：唤醒线程在发出行唤醒操作后继续运行，并且只有它退出管程之后，才允许等待的线程开始运行。
 注：此时唤醒线程的执行位置还在管程中。</p></li>
 </ul>
-<p>一般开发者会采纳 Brinch Hansen 的建议，因为它在概念上更简单，并且更容易实现。这种沟通机制的具体实现就是
+<p>下面介绍一个基于 Mesa 语义的沟通机制。这种沟通机制的具体实现就是
 <strong>条件变量</strong> 和对应的操作：wait 和 signal。线程使用条件变量来等待一个条件变成真。
 条件变量其实是一个线程等待队列，当条件不满足时，线程通过执行条件变量的 wait
 操作就可以把自己加入到等待队列中，睡眠等待（waiting）该条件。另外某个线程，当它改变条件为真后，
@@ -525,7 +525,7 @@ A 为 1，让线程 second 等待的条件满足，然后会执行条件变量�
 <span class="hll"><span class="linenos">27</span><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">signal</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 </span><span class="linenos">28</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">inner</span><span class="p">.</span><span class="n">exclusive_access</span><span class="p">();</span><span class="w"></span>
 <span class="linenos">29</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">task</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">wait_queue</span><span class="p">.</span><span class="n">pop_front</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="linenos">30</span><span class="w">            </span><span class="n">add_task</span><span class="p">(</span><span class="n">task</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">30</span><span class="w">            </span><span class="n">wakeup_task</span><span class="p">(</span><span class="n">task</span><span class="p">);</span><span class="w"></span>
 <span class="linenos">31</span><span class="w">        </span><span class="p">}</span><span class="w"></span>
 <span class="linenos">32</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="hll"><span class="linenos">33</span><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">wait</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">mutex</span>:<span class="nc">Arc</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Mutex</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>

@@ -108,7 +108,7 @@ second 休眠，直到等待的条件满足，再继续执行。于是，我们�
 - Mesa 语义：唤醒线程在发出行唤醒操作后继续运行，并且只有它退出管程之后，才允许等待的线程开始运行。
   注：此时唤醒线程的执行位置还在管程中。
 
-一般开发者会采纳 Brinch Hansen 的建议，因为它在概念上更简单，并且更容易实现。这种沟通机制的具体实现就是
+下面介绍一个基于 Mesa 语义的沟通机制。这种沟通机制的具体实现就是
 **条件变量** 和对应的操作：wait 和 signal。线程使用条件变量来等待一个条件变成真。
 条件变量其实是一个线程等待队列，当条件不满足时，线程通过执行条件变量的 wait
 操作就可以把自己加入到等待队列中，睡眠等待（waiting）该条件。另外某个线程，当它改变条件为真后，
@@ -270,7 +270,7 @@ A 为 1，让线程 second 等待的条件满足，然后会执行条件变量�
         pub fn signal(&self) {
             let mut inner = self.inner.exclusive_access();
             if let Some(task) = inner.wait_queue.pop_front() {
-                add_task(task);
+                wakeup_task(task);
             }
         }
         pub fn wait(&self, mutex:Arc<dyn Mutex>) {
